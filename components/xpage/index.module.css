@@ -1,0 +1,146 @@
+.content {
+  background-color: #fff;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.body {
+  overflow-y: scroll;
+  height: calc(100% - 42px);
+}
+
+.headerTab {
+
+  height: 42px;
+  display: flex;
+  align-items: center;
+  border-bottom: solid #EEF0F2 1px;
+  padding-left: 16px;
+
+}
+
+.headerTitle {
+  color: #202630;
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.headerLine {
+  width: 1px;
+  height: 19px;
+  background-color: #EEF0F2;
+  margin: 0 16px;
+}
+
+.timeTabs {
+  display: flex;
+  color: #202630;
+  font-family: "DM Sans";
+  font-size: 12px;
+  font-style: normal;
+  gap: 16px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.aiReport {
+  margin: 16px 16px 0px;
+  border-radius: 10px;
+  border: 1px solid #EEF0F2;
+  background: #FDFDFD;
+  padding: 16px;
+
+
+}
+
+.markdwon {
+  margin-top: 16px;
+  height: 24vh;
+  overflow-y: scroll;
+}
+
+.aiReportTitle {
+  color: #202630;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.tabs {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 12px;
+  height: 48px;
+  margin: 0 16px;
+  border-bottom: 1px #EEF0F2 solid;
+}
+
+.tab {
+  color: #202630;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.activeTab {
+  color: #3F6DFF;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+
+  font-weight: 600;
+  line-height: normal;
+  border-bottom: 1.5px #3F6DFF solid;
+
+}
+
+.tabContent {
+  margin-top: 24px;
+}
+
+.fans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vw;
+  padding: 16px;
+  justify-content: space-between;
+}
+
+.lineLineChartItem {
+  border: 1px solid #EEF0F2;
+  background: #FDFDFD;
+
+  border-radius: 12px;
+
+  width: 48.7%;
+}
+.postDataItem{
+   border: 1px solid #EEF0F2;
+  background: #FDFDFD;
+
+  border-radius: 12px;
+
+  width: 48.7%;
+  padding: 16px;
+}
+.chartTitle {
+  margin-left: 16px;
+  margin-top: 16px;
+  color: #202630;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}

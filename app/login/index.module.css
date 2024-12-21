@@ -1,0 +1,128 @@
+.container {
+
+    width: 425px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    border: 2px solid #EEF0F2;
+    background: #FFF;
+    margin-top: 6vh;
+    height: auto;
+    padding: 24px 32px;
+}
+
+.body {
+    padding-bottom: 6vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.regitsterHeader {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 32px;
+    position: relative;
+}
+
+.close{
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+}
+.tabTitle {
+    color: #17171C;
+    font-family: Matter;
+    font-size: 18px;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.active {
+
+    color: #3F6DFF;
+    font-family: Matter;
+    font-size: 18px;
+    font-style: normal;
+    border-bottom: 1.5px solid #3F6DFF;
+
+    font-weight: 600;
+    line-height: normal;
+}
+
+.itemTitle {
+    color: #000;
+    font-family: Matter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    opacity: 0.6027;
+}
+
+.item {
+    margin-top: 24px;
+}
+
+.inputBorder {
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #EEF0F2;
+    width: 361px;
+    height: 50px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+}
+
+.input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.input {
+
+    width: 300px;
+}
+
+.send {
+    color: #FFF;
+    font-family: Matter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #3F6DFF;
+    padding: 6px 12px;
+}
+
+.confirm {
+    margin-top: 24px;
+    border-radius: 8px;
+    background: #3F6DFF;
+    width: 361px;
+    height: 50px;
+    flex-shrink: 0;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Matter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

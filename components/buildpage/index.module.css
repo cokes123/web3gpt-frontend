@@ -1,0 +1,22 @@
+.build {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.buildTitle {
+  color: #202630;
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 24px;
+}

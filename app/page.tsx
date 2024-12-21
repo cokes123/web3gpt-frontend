@@ -1,101 +1,402 @@
-import Image from "next/image";
+"use client"
+import React, { useEffect, useState } from "react";
+import styles from './index.module.css';
+import Image from 'next/image'
 
-export default function Home() {
+import Header from "@/components/header/header";
+import { useRouter } from "next/navigation";
+
+const Home: React.FC = () => {
+
+  const router = useRouter();
+
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <Header />
+      <div className={styles.comprehensive}>
+        <div className={styles.comprehensiveLeft}>
+          <div className={styles.comprehensiveTitle}>
+            {'Comprehensive Data Analysis, All on One Page, AI-Powered Efficient Trading.'}
+          </div>
+          <div className={styles.goButton} onClick={() => {
+            router.push('/app')
+          }}>
+            {'GO TO APP'}
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className={styles.comprehensiveRight}>
+          <div style={{ zIndex: 10 }}>
+            <Image
+              width={836}
+              height={474}
+              className={styles.rightImage}
+              src="/images/home-top.png"
+              alt="" />
+          </div>
+          <div className={styles.comprehensiveRightTitle}>
+            LAZIBIT.AI
+          </div>
+        </div>
+      </div>
+      <div className={styles.advantages}>
+        <div className={styles.advantagesLeft}>
+          <div className={styles.advantagesLeftTitle}>
+            {'Core Advantages of Lazibit.AI'}
+          </div>
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+            width={409}
+            height={322}
+
+            src="/images/home-advantage.png"
+            alt="" />
+        </div>
+        <div className={styles.advantagesRight}>
+          <div className={styles.advantagesRightItem}>
+            <div className={styles.advantagesRightTitle}>
+              <div className={styles.advantagesRightImage}>
+                <Image
+                  width={22}
+                  height={22}
+
+                  src="/fonts/home-1.svg"
+                  alt="" />
+              </div>
+              Comprehensive Data Analysis
+            </div>
+            <div className={styles.advantagesRightContent}>
+              Quickly access project trend analysis, on-chain data, community popularity, KOL trends, technical progress, and changes at a glance.
+            </div>
+          </div>
+          <div className={styles.advantagesRightItem}>
+            <div className={styles.advantagesRightTitle}>
+              <div className={styles.advantagesRightImage}>
+                <Image
+                  width={22}
+                  height={22}
+
+                  src="/fonts/home-2.svg"
+                  alt="" />
+              </div>
+              Smart Notification System
+            </div>
+            <div className={styles.advantagesRightContent}>
+              Customize SMS, phone, or Telegram notifications to ensure you never miss any market movements.
+            </div>
+          </div>
+          <div className={styles.advantagesRightItem}>
+            <div className={styles.advantagesRightTitle}>
+              <div className={styles.advantagesRightImage}>
+                <Image
+                  width={22}
+                  height={22}
+
+                  src="/fonts/home-3.svg"
+                  alt="" />
+              </div>
+              AI Companion Bot Assistant
+            </div>
+            <div className={styles.advantagesRightContent}>
+              Customize trading parameters, real-time strategy evaluation, and achieve automated trading effortlessly.
+            </div>
+          </div>
+          <div className={styles.advantagesRightItem}>
+            <div className={styles.advantagesRightTitle}>
+              <div className={styles.advantagesRightImage}>
+                <Image
+                  width={22}
+                  height={22}
+
+                  src="/fonts/home-4.svg"
+                  alt="" />
+              </div>
+              Multi-platform Aggregation
+            </div>
+            <div className={styles.advantagesRightContent}>
+              Supports global exchanges, integrates data into one page, and provides a seamless experience.
+            </div>
+          </div>
+          <div className={styles.advantagesRightItem}>
+            <div className={styles.advantagesRightTitle}>
+              <div className={styles.advantagesRightImage}>
+                <Image
+                  width={22}
+                  height={22}
+
+                  src="/fonts/home-1.svg"
+                  alt="" />
+              </div>
+              AI-Driven K-Line Analysis
+            </div>
+            <div className={styles.advantagesRightContent}>
+              AI-powered K-Line analysis to predict future price trends and gain an edge in the market.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div className={styles.pageDisplay}>
+        <div className={styles.displayTitle}>
+          {"Lazibit.AI Page Display"}
+        </div>
+        <div className={styles.displayImage}>
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+            width={1022}
+            height={658}
+            src="/images/home-top.png"
+            alt="" />
+        </div>
+      </div>
+      <div className={styles.corefunction}>
+        <div className={styles.corefunctionTitle}>
+          {'Core Function Titles'}
+        </div>
+        <div className={styles.functionItem}>
+          <div className={styles.functionText}>
+            <div className={styles.functionItemTitle}>
+              {"Social Media and Community"}
+            </div>
+            <div className={styles.funcionItemContent}>
+              {"Gain valuable insights into project community dynamics and monitor real-time shifts in sentiment through our aggregate global Web3 news to ensure proactive awareness of market developments. Leverage the power of KOLs in our platform to understand market consensus and stay ahead of emerging trends. "}
+            </div>
+            <div className={styles.funcionItemButton}>
+              {"Detalis"}
+              <Image
+                width={20}
+                height={20}
+                src="/fonts/arrow.svg"
+                alt="" />
+            </div>
+          </div>
+          <div className={styles.functionImage}>
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/core-fun-1.png"
+                alt="" />
+          </div>
+        </div>
+        <div className={styles.functionItem}>
+
+          <div className={styles.functionImage}>
+          <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/core-fun-2.png"
+                alt="" />
+          </div>
+          <div className={styles.functionText}>
+            <div className={styles.functionItemTitle}>
+              {"K-Line Analysis"}
+            </div>
+            <div className={styles.funcionItemContent}>
+              {"A wealth of historical data used to analyze and predict price movements, helping users to interpret market sentiment and identifying key trends. Use Lazibit analysis to uncover trading opportunities and make informed, strategic decisions."}
+            </div>
+            <div className={styles.funcionItemButton}>
+              {"Detalis"}
+              <Image
+                width={20}
+                height={20}
+                src="/fonts/arrow.svg"
+                alt="" />
+            </div>
+          </div>
+        </div>
+        <div className={styles.functionItem}>
+          <div className={styles.functionText}>
+            <div className={styles.functionItemTitle}>
+              {"On-chain Data Analysis"}
+            </div>
+            <div className={styles.funcionItemContent}>
+              {"Unlock actionable insights by decoding on-chain data, tracking market trends, user behavior, and network activity. Use these insights for your investment strategies to enhance risk management, and enable data-driven decision-making."}
+            </div>
+            <div className={styles.funcionItemButton}>
+              {"Detalis"}
+              <Image
+                width={20}
+                height={20}
+                src="/fonts/arrow.svg"
+                alt="" />
+            </div>
+          </div>
+          <div className={styles.functionImage}>
+          <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/core-fun-3.png"
+                alt="" />
+          </div>
+        </div>
+        <div className={styles.functionItem}>
+
+          <div className={styles.functionImage}>
+          <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/core-fun-4.png"
+                alt="" />
+          </div>
+          <div className={styles.functionText}>
+            <div className={styles.functionItemTitle}>
+              {"Real-Time Alerts"}
+            </div>
+            <div className={styles.funcionItemContent}>
+              {"Stay updated with notifications on market movements and price fluctuations. Lazibit monitor real-time changes in community sentiment, giving you the benefit from our custom metrics and condition-based alerts to seize the trade."}
+            </div>
+            <div className={styles.funcionItemButton}>
+              {"Detalis"}
+              <Image
+                width={20}
+                height={20}
+                src="/fonts/arrow.svg"
+                alt="" />
+            </div>
+          </div>
+        </div>
+        <div className={styles.functionItem}>
+          <div className={styles.functionText}>
+            <div className={styles.functionItemTitle}>
+              {"Aggregation Transaction"}
+            </div>
+            <div className={styles.funcionItemContent}>
+              {"Real time prices from multiple exchanges and aggregator sources. Lazibit smart algorithms identify the most efficient trade execution paths. Reduce costs, enhance operational efficiency, and maximize returns for users through optimized trading solutions."}
+            </div>
+            <div className={styles.funcionItemButton}>
+              {"Detalis"}
+              <Image
+                width={20}
+                height={20}
+                src="/fonts/arrow.svg"
+                alt="" />
+            </div>
+          </div>
+          <div className={styles.functionImage}>
+          <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/core-fun-5.png"
+                alt="" />
+          </div>
+        </div>
+      </div>
+      <div className={styles.userExperience}>
+        <div className={styles.userExperienceTitle}>
+          {'User Experience Process'}
+        </div>
+        <div className={styles.userExperienceContent}>
+          <div className={styles.userExperienceLine}></div>
+          <div className={styles.userExperienceItem}>
+            <div className={styles.userExperienceImage}>
+              <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/userExperience-1.png"
+                alt="" />
+            </div >
+            <div className={styles.userExperienceItemTitle}>
+              {"Register an account"}
+            </div>
+            <div className={styles.userExperienceItemContent}>
+              {"Enter your email address for quick registration."}
+            </div>
+          </div>
+          <div className={styles.userExperienceArrow}>
+            <Image
+              width={16}
+              height={16}
+              src="/fonts/arrow-1.svg"
+              alt="" />
+          </div>
+          <div className={styles.userExperienceItem}>
+            <div className={styles.userExperienceImage}>
+              <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/userExperience-2.png"
+                alt="" />
+            </div >
+            <div className={styles.userExperienceItemTitle}>
+              {"Set Focus Tokens"}
+            </div>
+            <div className={styles.userExperienceItemContent}>
+              {"Select tokens and metrics of interest."}
+            </div>
+          </div>
+          <div className={styles.userExperienceArrow}>
+            <Image
+              width={16}
+              height={16}
+              src="/fonts/arrow-1.svg"
+              alt="" />
+          </div>
+          <div className={styles.userExperienceItem}>
+            <div className={styles.userExperienceImage}>
+              <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/userExperience-3.png"
+                alt="" />
+            </div >
+            <div className={styles.userExperienceItemTitle}>
+              {"View Analytics Reports"}
+            </div>
+            <div className={styles.userExperienceItemContent}>
+              {"extract value from your data"}
+            </div>
+          </div>
+          <div className={styles.userExperienceArrow}>
+            <Image
+              width={16}
+              height={16}
+              src="/fonts/arrow-1.svg"
+              alt="" />
+          </div>
+          <div className={styles.userExperienceItem}>
+            <div className={styles.userExperienceImage}>
+              <Image
+                fill
+                style={{ objectFit: "contain" }}
+                src="/fonts/userExperience-4.png"
+                alt="" />
+            </div >
+            <div className={styles.userExperienceItemTitle}>
+              {"Smart Trading"}
+            </div>
+            <div className={styles.userExperienceItemContent}>
+              {"Automate your trading with AI assistants."}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.howWork}>
+        <div className={styles.howWorkTitle}>
+          {'How Lazibit.AI works'}
+        </div>
+        <Image
+          width={1200}
+          height={395}
+          src="/images/howwork.png"
+          alt="" />
+
+      </div>
+      <div className={styles.startNow}>
+        <div className={styles.startNowTitle}>
+          {'Start Now and Unlock the Future of Smart Trading！'}
+        </div>
+        <div className={styles.startNowButtons}>
+          <div className={styles.startNowButton}>
+            {'Free Trial'}
+          </div>
+          <div className={styles.startNowButton}>
+            {'Upgrade for Advanced Features'}
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;

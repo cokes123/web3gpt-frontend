@@ -1,0 +1,225 @@
+
+
+.topInfo {
+    display: flex;
+    height: 133px;
+    margin-top: 8px;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+.banner {
+    border-radius: 8px;
+    background: #FFF;
+    width: 320px;
+    position: relative;
+    height: 133px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bodyRight {
+
+    border-radius: 8px;
+    background: #FFF;
+    width: 320px;
+    position: relative;
+    height: calc(100vh - 222px);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.myFollow {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    background: #FFF;
+    display: flex;
+    padding-left: 16px;
+    align-items: center;
+}
+
+.myFollowTitle {
+    color: #202630;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.line {
+    margin: 0 16px;
+    width: 1px;
+    height: 28px;
+    background-color: rgba(0, 0, 0, 0.10);
+}
+
+.myFollowCoinlist {
+    display: flex;
+    gap: 16px;
+
+}
+
+.myFollowCoinItem {
+    display: flex;
+    gap: 8px;
+}
+
+.myFollowCoinItemName {
+    color: #202630;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.myFollowCoinItemChange {
+    color: #2DBD85;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.topInfoLeft {
+
+    width: 1900px;
+}
+
+.coinTab {
+    margin-top: 7px;
+    width: 100%;
+    height: 78px;
+    border-radius: 8px;
+    display: flex;
+    background: #FFF;
+    align-items: center;
+    padding-left: 16px;
+}
+
+.coinInfo {
+    display: flex;
+    align-items: center;
+}
+
+.coinName {
+
+    margin-left: 16px;
+}
+
+.coinNameTitle {
+    color: #202630;
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.coinExchangeChange {
+    color: #202630;
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 3px;
+    background: #F5F5F5;
+    padding: 3px 6px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.price {
+    margin-left: 16px;
+}
+
+.priceTitle {
+    color: #2DBD85;
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.priceContent {
+
+    color: #202630;
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.lineTab {
+
+    width: 1px;
+    height: 66px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.10);
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tab {
+    width: 139.937px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 12px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.05);
+    color: #202630;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.activeTab {
+    color: #FFF;
+    background-color: #3F6DFF;
+}
+
+
+.body {
+    display: flex;
+    margin: 8px;
+    max-width: 100vw;
+    overflow: hidden;
+    gap: 8px;
+}
+
+.bodyLeft {
+    position: relative;
+    border-radius: 8px;
+    width: 1900px;
+    height: calc(100vh - 222px);
+
+}
