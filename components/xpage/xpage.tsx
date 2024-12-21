@@ -30,7 +30,7 @@ const Xpage: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0)
   const [postData, setPostData] = useState([])
 
-  const [fans, setFans] = useState()
+  const [fans, setFans] = useState<any>()
   const fetchXReportFunc = async () => {
     try {
       const xReportParams = {

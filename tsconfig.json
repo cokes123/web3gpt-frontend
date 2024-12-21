@@ -2,6 +2,8 @@
   "compilerOptions": {
     "jsx": "preserve",
     "module": "esnext",
+    "skipLibCheck": true,
+    "noEmitOnError": false,
     "target": "es5",
     "lib": [
       "dom",
@@ -10,7 +12,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,

@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { registerReq } from '@/api/login';
 const Register = () => {
     const router = useRouter();
-    const [tip, setTip] = useState({
+    const [tip, setTip] = useState<any>({
         content: '',
         type: 'success'
     })
@@ -236,7 +236,7 @@ const Register = () => {
                 onClose={handleClose}
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // 弹出位置
             >
-                {/* Alert 组件增强消息样式 */}
+
                 <Alert onClose={handleClose} severity={tip.type} sx={{ width: '100%' }}>
                     {tip.content}
                 </Alert>

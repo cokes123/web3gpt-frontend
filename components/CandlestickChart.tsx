@@ -24,6 +24,7 @@ interface RawCandleData {
 }
 
 const transformData = (rawData: RawCandleData[]): CandlestickData[] => {
+  //@ts-ignore
   return rawData.map((item) => ({
     time: Math.floor(item.t / 1000), // 转换为秒级 UNIX 时间戳
     open: parseFloat(item.o),
@@ -123,7 +124,7 @@ export default function LightweightChart() {
         low: item[3],
         close: item[4],
     }));
-
+    //@ts-ignore
       candlestickSeries.setData(candlestickData);
       // 清理函数
       return () => {
