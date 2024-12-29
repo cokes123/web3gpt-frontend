@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { createChart,LineStyle, CandlestickData } from "lightweight-charts";
+import { createChart, LineStyle, CandlestickData } from "lightweight-charts";
 import { fetchKLines } from "@/api/aiReportService";
 
 interface RawCandleData {
@@ -53,10 +53,10 @@ export default function LightweightChart() {
     const decimalPlaces = Math.max(0, -exponent + 3);
     // 使用 toFixed 格式化数字
     return num.toFixed(decimalPlaces);
-}
+  }
   useEffect(() => {
     const initializeChart = async () => {
-      
+
       // 创建图表实例
       const chartOptions = {
         layout: {
@@ -117,14 +117,15 @@ export default function LightweightChart() {
       window.addEventListener("resize", handleResize);
 
       const rawData = await fetchKLineData();
-      const candlestickData = rawData.map((item: any) => ({
-        time: item[0] / 1000,
-        open: item[1],
-        high: item[2],
-        low: item[3],
-        close: item[4],
-    }));
-    //@ts-ignore
+      const candlestickData = rawData.map(item => ({
+        time: item.t,                         // 时间戳 (通常为毫秒)
+        open: parseFloat(item.o),             // 开盘价
+        high: parseFloat(item.h),             // 最高价
+        low: parseFloat(item.l),              // 最低价
+        close: parseFloat(item.c)             // 收盘价
+      }));
+      console.log('sixuwang', candlestickData)
+      //@ts-ignore
       candlestickSeries.setData(candlestickData);
       // 清理函数
       return () => {

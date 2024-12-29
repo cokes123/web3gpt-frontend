@@ -18,15 +18,18 @@ const Header: React.FC = () => {
         <div className={styles.header}>
             <Image
                 width={123}
+                onClick={() => {
+                    router.push('/app')
+                }}
                 height={30}
                 src="/images/logo.png"
                 alt="" />
             <div
                 onClick={() => {
-                    router.push('/login')
+                    router.push(userName ? '/userinfo' : '/login')
                 }}
                 className={styles.loginButton}>
-                {userName ? userName :"Log In"}
+                {userName ? userName : "Log In"}
             </div>
         </div>
     );

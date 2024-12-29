@@ -18,7 +18,7 @@ interface XOfficialStatsResponse {
   comments: Stat[];
   likes: Stat[];
 }
-const base_url = "http://chat.chainservice.io:8888/api/v1/lazibit"
+const base_url = "https://chat.chainservice.io/api/v1/lazibit"
 const base2_url = "https://api.lazibit.ai/v1";
 
 /**
@@ -235,7 +235,7 @@ export async function fetchKLines({
   try {
     const url = `${base2_url}/klines`;
     const params = { symbol, interval, exchange };
-    const response = await axios.get('https://bibobibo.xyz/api/trades/kline?tokenId=bitcoin&from=1731784980&to=1734290580');
+    const response = await axios.get('https://api.lazibit.ai/v1/klines?exchange=binance&symbol=BTCUSDT&interval=1m');
 
     if (response.status === 200) {
       // 假设API返回的数据结构为 { data: RawCandleData[] }
