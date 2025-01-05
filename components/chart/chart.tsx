@@ -7,86 +7,104 @@ import LightweightChart from '../CandlestickChart';
 import Image from 'next/image'
 import Loading from '../loading/loading';
 
-const Chart: React.FC = () => {
-    const [klineData, setKlineData] = useState<KlinePayload | null>(null);
+const Chart = ({ token = { baseAsset: 'BTC', symbol: 'BTCUSDT' } }) => {
     const [aidata, setAidata] = useState("");
-    const [orderBookData, setOrderBookdata] = useState({
-        a: [],
-        b: []
-    })
+    const [orderBookData, setOrderBookData] = useState({ a: [], b: [] });
+    const [klineData, setKlineData] = useState(null); // Assuming you have this state
+
     useEffect(() => {
-        const response = fetchKLineReport({
-            token: 'bitcoin',
-            exchange: 'binance',
-            start: '1733791787',
-            end: '1733878197',
-            interval: 'hourly',
-            language: 'en',
-            withOrderBook: 0,
-        }).then(res => {
-            setAidata(res)
+        if (!token || !token.symbol || !token.baseAsset) {
+            console.warn('Token, token.symbol, or token.baseAsset is missing.');
+            return;
+        }
 
-        }).catch(error => {
-
-            console.log(error, 222)
-        });
-        // 创建 WebSocket 实例
-        const socket = new WebSocket("wss://stream.lazibit.ai");
-
-        // 连接成功时触发
-        socket.onopen = () => {
-            console.log("WebSocket Connected");
-            // 发送订阅信息
-            const subscribeMessage = {
-                method: "SUBSCRIBE",
-                // params: ["BTCUSDT@kline_1m_binance"],
-                params: [
-                    "BTCUSDT@orderbook_binance", // 已有的订阅
-                    "BTCUSDT@kline_1m_binance"  // 新的订阅
-                ],
-
-            };
-
-            socket.send(JSON.stringify(subscribeMessage));
+        // Fetch K-Line Report
+        const fetchData = async () => {
+            try {
+                const res = await fetchKLineReport({
+                    token: token.baseAsset,
+                    exchange: 'binance',
+                    start: '1733791787',
+                    end: '1733878197',
+                    interval: 'hourly',
+                    language: 'en',
+                    withOrderBook: 0,
+                });
+                setAidata(res);
+                console.log('Fetched K-Line Report:', res);
+            } catch (error) {
+                console.error('Error fetching K-Line Report:', error);
+            }
         };
 
-        // 接收消息时触发
-        socket.onmessage = (event: MessageEvent) => {
+        fetchData();
+
+        // Establish WebSocket Connection
+        const socket = new WebSocket("wss://stream.lazibit.ai");
+
+        socket.onopen = () => {
+            console.log("WebSocket Connected");
+
+            // Prepare Subscription Message
+            const subscribeMessage = {
+                method: "SUBSCRIBE",
+                params: [
+                    `${token.symbol}@orderbook_binance`, // Existing subscription
+                    `${token.symbol}@kline_1m_binance`  // Verify if this is correct
+                ],
+                id: 1 // Optional: An identifier for the request
+            };
+
+            // Send Subscription Message
+            socket.send(JSON.stringify(subscribeMessage));
+            console.log('Sent subscription message:', subscribeMessage);
+        };
+
+        socket.onmessage = (event) => {
             try {
-                const data: KlinePayload = JSON.parse(event.data);
+                const data = JSON.parse(event.data);
+                console.log('Received WebSocket message:', data);
 
                 if (data.e === "kline") {
-                    setKlineData(JSON.parse(event.data))
-                    console.log(JSON.parse(event.data))
+                    setKlineData(data); // Directly use parsed data
                 } else if (data.e === "orderBook") {
-                    setOrderBookdata(JSON.parse(event.data))
+                    // Ensure data structure matches { a: [], b: [] }
+                    console.log('sixuwang',data)
+                    setOrderBookData({
+                        a: data.a || [],
+                        b: data.b || []
+                    });
                 }
-
             } catch (error) {
                 console.error("Error parsing WebSocket message:", error);
             }
         };
 
-        // 出现错误时触发
         socket.onerror = (error) => {
             console.error("WebSocket Error:", error);
         };
 
-        // WebSocket 关闭时触发
-        socket.onclose = () => {
-            console.log("WebSocket Disconnected");
+        socket.onclose = (event) => {
+            if (event.wasClean) {
+                console.log(`WebSocket Closed Cleanly, code=${event.code} reason=${event.reason}`);
+            } else {
+                console.warn('WebSocket Closed Unexpectedly');
+            }
         };
 
-        // 组件卸载时清理 WebSocket
+        // Cleanup Function
         return () => {
-            socket.close(); // 关闭 WebSocket
+            if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+                socket.close();
+                console.log("WebSocket Connection Closed");
+            }
         };
-    }, []);
+    }, [token.symbol, token.baseAsset]);
     return (
         <div>
             <div className={styles.chart}>
                 <div className={styles.kLine}>
-                    <LightweightChart ></LightweightChart>
+                    <LightweightChart token={token}></LightweightChart>
                 </div>
 
                 <div className={styles.orderBook}>
@@ -118,11 +136,11 @@ const Chart: React.FC = () => {
                 </div>
             </div>
             <div className={styles.bottom}>
-                <div className={styles.bottomHeader }>
-                    <div className={styles.bottomTitle+ " " + styles.activeBottom}>
+                <div className={styles.bottomHeader}>
+                    <div className={styles.bottomTitle + " " + styles.activeBottom}>
                         {"AI analysis"}
                     </div>
-                    <div className={styles.bottomTitle}>
+                    {/* <div className={styles.bottomTitle}>
                         {"Spot"}
                     </div>
                     <div className={styles.bottomTitle}>
@@ -130,7 +148,7 @@ const Chart: React.FC = () => {
                     </div>
                     <div className={styles.bottomTitle}>
                         {"Order History"}
-                    </div>
+                    </div> */}
                     <div>
                         {/* <div className={styles.languageSelect}>
         <Box sx={{ minWidth: 120, height: 40 }}>

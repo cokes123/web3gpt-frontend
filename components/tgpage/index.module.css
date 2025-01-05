@@ -81,7 +81,6 @@
 }
 
 .tab {
-  cursor: pointer;
   color: #202630;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -125,9 +124,8 @@
 
   width: 48.7%;
 }
-
-.postDataItem {
-  border: 1px solid #EEF0F2;
+.postDataItem{
+   border: 1px solid #EEF0F2;
   background: #FDFDFD;
 
   border-radius: 12px;
@@ -135,60 +133,6 @@
   width: 48.7%;
   padding: 16px;
 }
-
-.postDataName {
-  align-items: center;
-  gap: 16px;
-  color: #202630;
-  font-family: "DM Sans";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  display: flex;
-}
-
-.postContent {
-  color: #202630;
-  font-family: "DM Sans";
-  font-size: 14px;
-  font-style: normal;
-  margin-top: 24px;
-  font-weight: 300;
-  line-height: normal;
-  opacity: 0.8028;
-}
-
-.postAuthorId {
-
-  color: #202630;
-  font-family: "DM Sans";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-  opacity: 0.3995;
-}
-
-.postIcons {
-  display: flex;
-  margin-top: 24px;
-  gap: 24px;
-}
-
-.postIcon {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #202630;
-  font-family: "DM Sans";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 300;
-  opacity: 0.6031;
-  line-height: normal;
-}
-
 .chartTitle {
   margin-left: 16px;
   margin-top: 16px;
@@ -198,36 +142,4 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-}
-
-.keyword {
-  cursor: pointer;
-  color: #3F6DFF;
-  font-family: "DM Sans";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  display: flex;
-  padding: 6px 8px;
-  border-radius: 6px;
-  background: #3f6cff2a;
-
-}
-
-.activekeywords {
-  color: #FFF;
-  font-family: "DM Sans";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  background: #3F6DFF;
-
-}
-
-.keywords {
-  padding-left: 16px;
-  gap: 12px;
-  display: flex;
 }

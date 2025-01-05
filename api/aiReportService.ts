@@ -108,7 +108,44 @@ export async function fetchXReport({
   }
 }
 
+/**
+ * 封装的函数，用于请求 AI 的 X report。
+ * @param {Object} params - 请求参数对象。
+ * @param {string} params.token - 代币，例如 'bitcoin'。
+ * @param {string} params.start - 起始时间戳（秒）。
+ * @param {string} params.end - 结束时间戳（秒）。
+ * @param {string} [params.language='en'] - 语言代码（'en', 'cn', 'kr'）。
+ * @returns {Promise<string>} 返回包含 `ai_report` 的 Markdown 文本。
+ * @throws {Error} 如果API返回错误或请求失败。
+ */
+export async function fetchTGReport({
+  token,
+  start,
+  end,
+  language = "en",
+}) {
+  try {
+    const url = base_url + "/ai/tg_report"; // 请确认正确的 API 端点
 
+    const requestData = {
+      token,
+      start,
+      end,
+      language,
+    };
+
+    const response = await axios.post(url, requestData);
+
+    if (response.data.code === 0 || response.data.code === 1) {
+      return response.data.data;
+    } else {
+      throw new Error(response.data.msg || 'Unknown error from API');
+    }
+  } catch (error) {
+    console.error('Error fetching X report:', error.message);
+    throw error;
+  }
+}
 
 /**
  * 封装的函数，用于请求 AI 的 X Official Stats。
@@ -146,6 +183,141 @@ export async function fetchXOfficialStats({
     throw error;
   }
 }
+
+
+export async function fetchXSentimentModel({
+  token,
+  start,
+  end,
+}: XOfficialStatsParams) {
+  try {
+    const url = base_url + "/x/sentiment"; // 请确认正确的 API 端点
+
+    const requestData = {
+      token,
+      start,
+      end,
+    };
+
+    const response = await axios.post(url, requestData);
+
+    // 检查返回结果 code 是否为 0
+    if (response.data.code === 0) {
+      return response.data.data;
+    } else {
+      throw new Error(response.data.msg || 'Unknown error from API');
+    }
+  } catch (error) {
+    console.error('Error fetching X Official Stats:', error.message);
+    throw error;
+  }
+}
+
+
+export async function fetchXKOLMentionsModel({
+  token,
+  start,
+  end,
+}: XOfficialStatsParams) {
+  try {
+    const url = base_url + "/x/kol_mentions"; // 请确认正确的 API 端点
+
+    const requestData = {
+      token,
+      start,
+      end,
+    };
+
+    const response = await axios.post(url, requestData);
+
+    // 检查返回结果 code 是否为 0
+    if (response.data.code === 0) {
+      return response.data.data;
+    } else {
+      throw new Error(response.data.msg || 'Unknown error from API');
+    }
+  } catch (error) {
+    console.error('Error fetching X Official Stats:', error.message);
+    throw error;
+  }
+}
+
+export async function fetchXKOLRelatedPostsModel({
+  token,
+  search,
+}: any) {
+  try {
+    const url = base_url + "/x/kol_related_posts"; // 请确认正确的 API 端点
+
+    const requestData = {
+      token,
+      search
+    };
+
+    const response = await axios.post(url, requestData);
+
+    // 检查返回结果 code 是否为 0
+    if (response.data.code === 0) {
+      return response.data.data;
+    } else {
+      throw new Error(response.data.msg || 'Unknown error from API');
+    }
+  } catch (error) {
+    console.error('Error fetching X Official Stats:', error.message);
+    throw error;
+  }
+}
+
+export async function fetchXKeywordsModel({
+  token,
+}: any) {
+  try {
+    const url = base_url + "/x/keywords"; // 请确认正确的 API 端点
+
+    const requestData = {
+      token,
+    };
+
+    const response = await axios.post(url, requestData);
+
+    // 检查返回结果 code 是否为 0
+    if (response.data.code === 0) {
+      return response.data.data;
+    } else {
+      throw new Error(response.data.msg || 'Unknown error from API');
+    }
+  } catch (error) {
+    console.error('Error fetching X Official Stats:', error.message);
+    throw error;
+  }
+}
+
+export async function fetchXKeywordStatsModel({
+  token,
+  keyword,
+}: any) {
+  try {
+    const url = base_url + "/x/keyword_stats"; // 请确认正确的 API 端点
+
+    const requestData = {
+      token,
+      keyword
+    };
+
+    const response = await axios.post(url, requestData);
+
+    // 检查返回结果 code 是否为 0
+    if (response.data.code === 0) {
+      return response.data.data;
+    } else {
+      throw new Error(response.data.msg || 'Unknown error from API');
+    }
+  } catch (error) {
+    console.error('Error fetching X Official Stats:', error.message);
+    throw error;
+  }
+}
+
 interface XCategoryPostsParams {
   token: string;
   start: string;
@@ -234,8 +406,7 @@ export async function fetchKLines({
 }): Promise<RawCandleData[]> {
   try {
     const url = `${base2_url}/klines`;
-    const params = { symbol, interval, exchange };
-    const response = await axios.get('https://api.lazibit.ai/v1/klines?exchange=binance&symbol=BTCUSDT&interval=1m');
+    const response = await axios.get(`https://api.lazibit.ai/v1/klines?exchange=binance&symbol=${symbol}&interval=1m`);
 
     if (response.status === 200) {
       // 假设API返回的数据结构为 { data: RawCandleData[] }
@@ -249,3 +420,27 @@ export async function fetchKLines({
   }
 }
 
+
+export async function fetchTokenList({
+  symbol = '',
+  exchange = '',
+}: {
+  symbol?: string;
+  exchange?: string;
+}): Promise<any[]> {
+  try {
+    const url = `${base2_url}/symbols`;
+    const params = { symbol, exchange };
+    const response = await axios.get(url, { params });
+
+    if (response.status === 200) {
+      // 假设API返回的数据结构为 { data: RawCandleData[] }
+      return response.data.data;
+    } else {
+      throw new Error(`API responded with status ${response.status}`);
+    }
+  } catch (error: any) {
+    console.error('Error fetching K-lines:', error.message);
+    throw error;
+  }
+}

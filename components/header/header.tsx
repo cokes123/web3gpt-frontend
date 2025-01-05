@@ -19,7 +19,7 @@ const Header: React.FC = () => {
             <Image
                 width={123}
                 onClick={() => {
-                    router.push('/app')
+                    router.push('/app?token=BTC')
                 }}
                 height={30}
                 src="/images/logo.png"

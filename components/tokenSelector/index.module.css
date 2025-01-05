@@ -6,10 +6,11 @@
 }
 
 
-.searchContainer{
+.searchContainer {
     width: 100%;
     padding: 0 16px;
 }
+
 .searchInput {
     width: 100%;
     padding: 6px;
@@ -18,14 +19,15 @@
     font-size: 14px;
     font-style: normal;
     margin-top: 16px;
-    
+
     font-weight: 500;
     line-height: normal;
     border-radius: 6px;
 }
 
 .display {
-
+    padding-left: 8px;
+    margin-right: 24px;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -57,13 +59,13 @@
 }
 
 .activeTab {
-   color: #3F6DFF !important;
-  font-family: "DM Sans";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600 !important;
-  line-height: normal;
-  border-bottom: 1.5px solid #3F6DFF;
+    color: #3F6DFF !important;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600 !important;
+    line-height: normal;
+    border-bottom: 1.5px solid #3F6DFF;
 
 }
 
@@ -71,12 +73,13 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 8px;
-   
-}
-.tokenbody{
 
-     padding: 0 16px;
 }
+
+.tokenbody {
+    padding: 0 8px;
+}
+
 .tokenTable th,
 .tokenTable td {
     color: #202630;
@@ -89,14 +92,26 @@
     text-align: lert;
 }
 
-.tokenTable tr{
-
+.tokenTable tbody tr {
+    cursor: pointer;
     padding-left: 16px;
 }
-.tokenTable tbody{
+
+.tokenTable tbody tr:hover {
+
+    background: #f6f6f6;
+}
+
+.activeToken {
+    background: #f6f6f6;
+
+}
+
+.tokenTable tbody {
     position: relative;
     overflow-y: hidden;
 }
+
 .tokenTable th {
     color: #202630;
     font-family: "DM Sans";
@@ -106,9 +121,11 @@
     line-height: normal;
     opacity: 0.59;
 }
-.thead{
+
+.thead {
     padding: 16px !important;
 }
+
 .positiveChange {
     color: green;
 }

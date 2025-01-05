@@ -15,30 +15,26 @@ const Home: React.FC = () => {
     <div>
       <Header />
       <div className={styles.comprehensive}>
+        <Image
+          fill
+          style={{
+            objectFit: "cover",
+            zIndex: 1
+          }}
+          src="/images/back.svg"
+          alt="" />
         <div className={styles.comprehensiveLeft}>
           <div className={styles.comprehensiveTitle}>
             {'Comprehensive Data Analysis, All on One Page, AI-Powered Efficient Trading.'}
           </div>
           <div className={styles.goButton} onClick={() => {
-            router.push('/app')
+            router.push('/app?token=BTC')
           }}>
             {'GO TO APP'}
           </div>
 
         </div>
-        <div className={styles.comprehensiveRight}>
-          <div style={{ zIndex: 10 }}>
-            <Image
-              width={836}
-              height={474}
-              className={styles.rightImage}
-              src="/images/home-top.png"
-              alt="" />
-          </div>
-          <div className={styles.comprehensiveRightTitle}>
-            LAZIBIT.AI
-          </div>
-        </div>
+
       </div>
       <div className={styles.advantages}>
         <div className={styles.advantagesLeft}>
@@ -138,6 +134,14 @@ const Home: React.FC = () => {
       </div>
 
       <div className={styles.pageDisplay}>
+        <Image
+          fill
+          style={{
+            objectFit: "cover",
+            zIndex: 1
+          }}
+          src="/images/back.svg"
+          alt="" />
         <div className={styles.displayTitle}>
           {"Lazibit.AI Page Display"}
         </div>
@@ -171,21 +175,21 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className={styles.functionImage}>
-          <Image
-                fill
-                style={{ objectFit: "contain" }}
-                src="/fonts/core-fun-1.png"
-                alt="" />
+            <Image
+              fill
+              style={{ objectFit: "contain" }}
+              src="/fonts/core-fun-1.png"
+              alt="" />
           </div>
         </div>
         <div className={styles.functionItem}>
 
           <div className={styles.functionImage}>
-          <Image
-                fill
-                style={{ objectFit: "contain" }}
-                src="/fonts/core-fun-2.png"
-                alt="" />
+            <Image
+              fill
+              style={{ objectFit: "contain" }}
+              src="/fonts/core-fun-2.png"
+              alt="" />
           </div>
           <div className={styles.functionText}>
             <div className={styles.functionItemTitle}>
@@ -222,21 +226,21 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className={styles.functionImage}>
-          <Image
-                fill
-                style={{ objectFit: "contain" }}
-                src="/fonts/core-fun-3.png"
-                alt="" />
+            <Image
+              fill
+              style={{ objectFit: "contain" }}
+              src="/fonts/core-fun-3.png"
+              alt="" />
           </div>
         </div>
         <div className={styles.functionItem}>
 
           <div className={styles.functionImage}>
-          <Image
-                fill
-                style={{ objectFit: "contain" }}
-                src="/fonts/core-fun-4.png"
-                alt="" />
+            <Image
+              fill
+              style={{ objectFit: "contain" }}
+              src="/fonts/core-fun-4.png"
+              alt="" />
           </div>
           <div className={styles.functionText}>
             <div className={styles.functionItemTitle}>
@@ -273,15 +277,23 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className={styles.functionImage}>
-          <Image
-                fill
-                style={{ objectFit: "contain" }}
-                src="/fonts/core-fun-5.png"
-                alt="" />
+            <Image
+              fill
+              style={{ objectFit: "contain" }}
+              src="/fonts/core-fun-5.png"
+              alt="" />
           </div>
         </div>
       </div>
       <div className={styles.userExperience}>
+        <Image
+          fill
+          style={{
+            objectFit: "cover",
+            zIndex: 1
+          }}
+          src="/images/back.svg"
+          alt="" />
         <div className={styles.userExperienceTitle}>
           {'User Experience Process'}
         </div>
@@ -383,6 +395,14 @@ const Home: React.FC = () => {
 
       </div>
       <div className={styles.startNow}>
+        <Image
+          fill
+          style={{
+            objectFit: "cover",
+            zIndex: 1
+          }}
+          src="/images/back.svg"
+          alt="" />
         <div className={styles.startNowTitle}>
           {'Start Now and Unlock the Future of Smart Trading！'}
         </div>

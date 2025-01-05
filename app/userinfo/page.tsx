@@ -13,7 +13,30 @@ const Register = () => {
     return (
         <div >
             <Header />
-            
+            <div className={styles.body}>
+                <div className={styles.leftBar}>
+                    <div className={styles.leftBarItem}>
+                        <Image
+                            width={20}
+                            height={20}
+                            src="/fonts/basic-blue.svg"
+                            alt="" />
+                        {"Basic Information"}</div>
+                    <div className={styles.leftBarItem}>
+                        <Image
+                            width={20}
+                            height={20}
+                            src="/fonts/key-black.svg"
+                            alt="" />
+                        {"Exchange Private Key"}</div>
+
+                </div>
+
+                <div className={styles.contnet}>
+
+                </div>
+            </div>
+
         </div>
     );
 };

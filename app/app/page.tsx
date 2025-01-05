@@ -18,6 +18,8 @@ import Xpage from "@/components/xpage/xpage";
 import BuildPage from "@/components/buildpage/buildpage";
 import TokenSelector from "@/components/tokenSelector/tokenSelector";
 import Header from "@/components/header/header";
+import TGpage from "@/components/tgpage/xpage";
+import { formatTs } from "@/utils/utils";
 
 const coins = [{
   name: 'ACT/USDT',
@@ -47,26 +49,27 @@ const coins = [{
 
 const tabs = [
 
-  {
-    name: 'Chart',
-    icon: '/fonts/chart',
-  },
+
   {
     name: 'X',
     icon: '/fonts/x'
   },
   {
+    name: 'Chart',
+    icon: '/fonts/chart',
+  },
+  {
     name: 'TG Group',
     icon: '/fonts/tg'
   },
-  {
-    name: 'Onchain Data',
-    icon: '/fonts/onchain'
-  },
-  {
-    name: 'Exchange Data',
-    icon: '/fonts/exchange'
-  },
+  // {
+  //   name: 'Onchain Data',
+  //   icon: '/fonts/onchain'
+  // },
+  // {
+  //   name: 'Exchange Data',
+  //   icon: '/fonts/exchange'
+  // },
   // {
   //   name: 'Competitor',
   //   icon: '/fonts/exchange.svg'
@@ -81,35 +84,36 @@ const tabs = [
   // },
 
 ]
-const tabContents = [{
-  content: <Chart></Chart>
-},{
-  content: <Xpage></Xpage>
-},{
-  content: <BuildPage></BuildPage>
-},{
-  content: <BuildPage></BuildPage>
-},{
-  content: <BuildPage></BuildPage>
-}]
+
 const Home: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState(0)
   const [age, setAge] = React.useState('');
-
+  const [token, setToken] = useState<any>()
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
-
+  const tabContents = [{
+    content: <Xpage token={token} />
+  }, {
+    content: <Chart token={token} />
+  },
+  {
+    content: <TGpage></TGpage>
+  }, {
+    content: <BuildPage></BuildPage>
+  }, {
+    content: <BuildPage></BuildPage>
+  }]
 
   return (
     <div>
-     
-      <Header/>
+
+      <Header />
       <div className={styles.topInfo}>
         <div className={styles.topInfoLeft}>
           <div className={styles.myFollow}>
-            <div className={styles.myFollowTitle}>My Follow</div>
+            <div className={styles.myFollowTitle}>Hot tokens</div>
             <div className={styles.line}></div>
             <div className={styles.myFollowCoinlist}>
               {coins.map(item =>
@@ -131,7 +135,7 @@ const Home: React.FC = () => {
                   alt="" />
               </div>
               <div className={styles.coinName}>
-                <div className={styles.coinNameTitle}>BTC/USDT</div>
+                <div className={styles.coinNameTitle}>{token ? `${token.baseAsset}/${token.quoteAsset}` : "BTC/USDT"}</div>
                 <div className={styles.coinExchangeChange}>Binance Exchange
                   <Image
                     width={8}
@@ -141,8 +145,8 @@ const Home: React.FC = () => {
               </div>
 
               <div className={styles.price}>
-                <div className={styles.priceTitle}>102,951.26</div>
-                <div className={styles.priceContent}>$102,951.26</div>
+                <div className={styles.priceTitle}>{token ? formatTs(token.lastPrice) : ''}</div>
+                <div className={styles.priceContent}>${token ? formatTs(token.lastPrice) : ''}</div>
 
               </div>
             </div>
@@ -151,14 +155,14 @@ const Home: React.FC = () => {
             <div className={styles.tabs}>
               {tabs.map((item, index) =>
                 <div className={`${styles.tab} ${index == activeTab ? styles.activeTab : ''}`}
-                onClick={()=>{
-                  setActiveTab(index)
-                }}
+                  onClick={() => {
+                    setActiveTab(index)
+                  }}
                 >
                   <Image
                     width={12}
                     height={12}
-                    src={`${item.icon}${index == activeTab?'-white':''}.svg`}
+                    src={`${item.icon}${index == activeTab ? '-white' : ''}.svg`}
                     alt="" />{item.name}
                 </div>
 
@@ -181,7 +185,7 @@ const Home: React.FC = () => {
           {tabContents[activeTab].content}
         </div>
         <div className={styles.bodyRight}>
-          <TokenSelector></TokenSelector>
+          <TokenSelector setToken={setToken}></TokenSelector>
         </div>
       </div>
 

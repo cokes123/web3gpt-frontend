@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createChart, LineStyle, CandlestickData } from "lightweight-charts";
 import { fetchKLines } from "@/api/aiReportService";
 
@@ -34,108 +34,113 @@ const transformData = (rawData: RawCandleData[]): CandlestickData[] => {
   }));
 };
 
-const fetchKLineData = async (): Promise<RawCandleData[]> => {
-  // 您的获取数据逻辑，例如从 API 获取
-  const data = await fetchKLines({ exchange: 'binance', interval: '1m', symbol: 'BTCUSDT' })
-  console.log(data, 111)
-  return data
-
+const fetchKLineData = async (token): Promise<RawCandleData[]> => {
+  console.log(token, 111);
+  const data = await fetchKLines({
+    exchange: "binance",
+    interval: "1m",
+    symbol: token.symbol,
+  });
+  return data;
 };
 
-export default function LightweightChart() {
+export default function LightweightChart({ token = { symbol: "BTCUSDT" } }) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<any>(null); // 引用图表实例
+  const candlestickSeriesRef = useRef<any>(null); // 引用 K 线系列
+  const [display, setDisplay] = useState(true);
+
   function formatNumber(num: number) {
-    // 将数字转换为科学记数法形式的字符串
     const numStr = num.toExponential();
-    // 提取指数部分
-    const exponent = parseInt(numStr.split('e')[1], 10);
-    // 计算所需的小数位数
+    const exponent = parseInt(numStr.split("e")[1], 10);
     const decimalPlaces = Math.max(0, -exponent + 3);
-    // 使用 toFixed 格式化数字
     return num.toFixed(decimalPlaces);
   }
+
+  // 初始化图表和系列
   useEffect(() => {
-    const initializeChart = async () => {
-
-      // 创建图表实例
-      const chartOptions = {
-        layout: {
-          textColor: 'black', background: { type: 'solid', color: '#ffffff' }
+    const chartOptions = {
+      layout: {
+        textColor: "black",
+        background: { type: "solid", color: "#ffffff" },
+      },
+      grid: {
+        vertLines: {
+          style: LineStyle.LargeDashed,
+          color: "rgba(0, 0, 0, 0.2)",
         },
-        grid: {
-          vertLines: {
-            style: LineStyle.LargeDashed,
-            color: 'rgba(0, 0, 0, 0.2)',
-          },
-          horzLines: {
-            visible: false,
-          },
+        horzLines: {
+          visible: false,
         },
-        localization: {
-          priceFormatter: (item: number) => formatNumber(item),
-        },
-        // crosshair: {
-        //     // Change mode from default 'magnet' to 'normal'.
-        //     // Allows the crosshair to move freely without snapping to datapoints
-        //     mode: CrosshairMode.Normal,
-
-        //     // Vertical crosshair line (showing Date in Label)
-        //     vertLine: {
-        //         width: 8,
-        //         color: '#C3BCDB44',
-        //         style: LineStyle.Solid,
-        //         labelBackgroundColor: '#9B7DFF',
-        //     },
-
-        //     // Horizontal crosshair line (showing Price in Label)
-        //     horzLine: {
-        //         color: '#9B7DFF',
-        //         labelBackgroundColor: '#9B7DFF',
-        //     },
-        // },
-      };
-      //@ts-ignore
-      const chart = createChart(chartContainerRef.current, chartOptions);
-      const candlestickSeries = chart.addCandlestickSeries({
-        upColor: '#4caf50',
-        downColor: '#f44336',
-        borderDownColor: '#f44336',
-        borderUpColor: '#4caf50',
-        wickDownColor: '#f44336',
-        wickUpColor: '#4caf50',
-      });
-      // candlestickSeries.priceScale().applyOptions({
-      //   borderColor: 'rgba(197, 203, 206, 0.8)',
-      //   mode: 1, // 使用Logarithmic模式
-
-      // });
-      const handleResize = () => {
-        //@ts-ignore
-
-        chart.resize(chartContainerRef.current.clientWidth, chartContainerRef.current.clientHeight);
-      };
-      window.addEventListener("resize", handleResize);
-
-      const rawData = await fetchKLineData();
-      const candlestickData = rawData.map(item => ({
-        time: item.t,                         // 时间戳 (通常为毫秒)
-        open: parseFloat(item.o),             // 开盘价
-        high: parseFloat(item.h),             // 最高价
-        low: parseFloat(item.l),              // 最低价
-        close: parseFloat(item.c)             // 收盘价
-      }));
-      console.log('sixuwang', candlestickData)
-      //@ts-ignore
-      candlestickSeries.setData(candlestickData);
-      // 清理函数
-      return () => {
-        window.removeEventListener("resize", handleResize);
-        chart.remove();
-      };
+      },
+      localization: {
+        priceFormatter: (item: number) => formatNumber(item),
+      },
+      // 可以根据需要启用 crosshair 配置
     };
 
-    initializeChart();
+    // 创建图表实例
+    //@ts-ignore
+    chartRef.current = createChart(chartContainerRef.current, chartOptions);
+
+    // 添加 K 线系列
+    candlestickSeriesRef.current = chartRef.current.addCandlestickSeries({
+      upColor: "#4caf50",
+      downColor: "#f44336",
+      borderDownColor: "#f44336",
+      borderUpColor: "#4caf50",
+      wickDownColor: "#f44336",
+      wickUpColor: "#4caf50",
+    });
+
+    // 监听窗口大小变化
+    const handleResize = () => {
+      if (chartContainerRef.current) {
+        chartRef.current.resize(
+          chartContainerRef.current.clientWidth,
+          chartContainerRef.current.clientHeight
+        );
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    // 清理函数：销毁图表实例和移除事件监听
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      chartRef.current.remove();
+    };
   }, []);
 
-  return <div ref={chartContainerRef} style={{ height: "100%", width: "100%" }} />;
+  // 更新 K 线数据，当 token.symbol 变化时
+  useEffect(() => {
+    const updateChartData = async () => {
+      if (!candlestickSeriesRef.current) return;
+
+      try {
+        const rawData = await fetchKLineData(token);
+        const candlestickData = transformData(rawData).reverse(); // 根据需求反转数据
+
+        console.log("更新K线数据", candlestickData);
+        candlestickSeriesRef.current.setData(candlestickData);
+
+        // 可选：调整图表时间范围
+        chartRef.current.timeScale().fitContent();
+      } catch (error) {
+        console.error("获取K线数据失败:", error);
+      }
+    };
+
+    updateChartData();
+  }, [token.symbol]);
+
+  return (
+    <>
+      {display && (
+        <div
+          ref={chartContainerRef}
+          style={{ height: "100%", width: "100%" }}
+        />
+      )}
+    </>
+  );
 }
