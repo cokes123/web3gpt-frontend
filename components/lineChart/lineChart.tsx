@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 import PropTypes from 'prop-types';
+import * as echarts from 'echarts';
 
 /**
  * FollowsLineChart 组件
@@ -55,12 +56,22 @@ const LineChart = ({ data, title = '', xAxisName = '', yAxisName = '' }) => {
         type: 'line',
         data: counts,
         smooth: true,
+        symbol: 'none', // 这里设置symbol为none，移除圆点
         lineStyle: {
-          color: '#3398DB',
-          width: 3,
+          color: '#3F6DFF',
+          width: 2,
         },
         areaStyle: {
-          color: 'rgba(51, 152, 219, 0.2)',
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [ // 创建垂直方向的渐变
+            {
+              offset: 1, // 0% 处的颜色（顶部）
+              color: 'rgba(51, 152, 219, 0)', // 完全透明
+            },
+            {
+              offset: 0, // 100% 处的颜色（底部）
+              color: 'rgba(51, 152, 219, 0.2)', // 半透明
+            },
+          ]),
         },
         itemStyle: {
           borderColor: '#3398DB',
