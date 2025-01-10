@@ -9,7 +9,7 @@
   
   .loadingTitle {
     color: #000;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -23,7 +23,7 @@
     color: #000;
     text-align: center;
     overflow-y: scroll;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;

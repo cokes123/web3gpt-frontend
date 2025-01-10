@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.css';
 import { fetchXCategoryPosts, fetchXKOLMentionsModel, fetchXKOLRelatedPostsModel, fetchXKeywordStatsModel, fetchXKeywordsModel, fetchXOfficialStats, fetchXReport, fetchXSentimentModel } from '@/api/aiReportService';
 import Loading from '../loading/loading';
@@ -25,6 +25,8 @@ const tabs = [
   { name: 'KOL' },
   // { name: '媒体' },
   { name: 'Tags popularity' },
+  { name: 'AI analysis report' },
+
   // { name: '推特/文章' },
   // { name: '竞品对比' },
 ]
@@ -32,7 +34,7 @@ const tabs = [
 const Xpage = ({ token = { baseAsset: 'BTC' } }) => {
   const [aiData, setAidata] = useState()
   const [activeTab, setActiveTab] = useState(0)
-  const [postData, setPostData] = useState([])
+  const [postData, setPostData] = useState<any>()
 
   const [fans, setFans] = useState<any>()
   const [sentiments, setSentiments] = useState<any>()
@@ -43,6 +45,8 @@ const Xpage = ({ token = { baseAsset: 'BTC' } }) => {
   const [activeKeyword, setActiveKeyword] = useState(0)
 
 
+  // Create refs for each tab content
+  const tabRefs = useRef([]);
 
   const fetchXReportFunc = async () => {
     try {
@@ -142,13 +146,45 @@ const Xpage = ({ token = { baseAsset: 'BTC' } }) => {
     };
 
     const dataStats = await fetchXKeywordStatsModel(params);
-    console.log(dataStats, 'sixu')
     setKeywordStats(dataStats)
   }
   useEffect(() => {
     fetchXReportFunc()
     fetchXOfficialStatsFunc()
   }, [token.baseAsset]);
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null, // Use the viewport as the container
+      rootMargin: '0px',
+      threshold: 0.6, // Trigger when 60% of the content is visible
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = Number(entry.target.getAttribute('data-index'));
+          setActiveTab(index);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    tabRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, []);
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    tabRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   return (
     <div className={styles.content}>
       <div className={styles.headerTab}>
@@ -162,74 +198,97 @@ const Xpage = ({ token = { baseAsset: 'BTC' } }) => {
           } */}
         </div>
       </div>
-      <div className={styles.body}>
 
-        <div className={styles.tabs}>
-          {tabs.map((item, index) => <div
-            onClick={() => {
-              setActiveTab(index)
-            }}
-            className={`${styles.tab} ${index == activeTab ? styles.activeTab : ''}`} key={item.name}>
-            {item.name}
-          </div>)}
+      <div className={styles.tabs}>
+        {tabs.map((item, index) => <div
+          onClick={() => {
+            handleTabClick(index)
+          }}
+          className={`${styles.tab} ${index == activeTab ? styles.activeTab : ''}`} key={item.name}>
+          {item.name}
+        </div>)}
+      </div>
+      <div className={styles.body} >
+
+        <div className={styles.nonecontent} data-index={0}
+          //@ts-ignore
+          ref={(el) => (tabRefs.current[0] = el)}>
+
         </div>
-        {activeTab == 0 && <div className={styles.tabContent}>
-          {fans && <div className={styles.fans}>
-            <div className={styles.lineLineChartItem}>
-              <div className={styles.chartTitle}>
-                {'X Follows'}
+        {!keywords && <div className={styles.tabContent} style={{ height: '900px' }}></div>}
+        {fans && <div className={styles.tabContent}>
+
+          {fans && <>
+            <div className={styles.contentTitle}>{tabs[0].name}</div>
+            <div className={styles.fans}>
+              <div className={styles.lineLineChartItem}>
+                <div className={styles.chartTitle}>
+                  {'X Follows'}
+                </div>
+                <LineChart data={fans.follows} />
               </div>
-              <LineChart data={fans.follows} />
-            </div>
-            <div className={styles.lineLineChartItem}>
-              <div className={styles.chartTitle}>
-                {'X Comments'}
+              <div className={styles.lineLineChartItem}>
+                <div className={styles.chartTitle}>
+                  {'X Comments'}
+                </div>
+                <LineChart data={fans.comments} />
               </div>
-              <LineChart data={fans.comments} />
-            </div>
-            <div className={styles.lineLineChartItem}>
-              <div className={styles.chartTitle}>
-                {'X Likes'}
+              <div className={styles.lineLineChartItem}>
+                <div className={styles.chartTitle}>
+                  {'X Likes'}
+                </div>
+                <LineChart data={fans.likes} />
               </div>
-              <LineChart data={fans.likes} />
-            </div>
-            <div className={styles.lineLineChartItem}>
-              <div className={styles.chartTitle}>
-                {'X Reposts'}
+              <div className={styles.lineLineChartItem}>
+                <div className={styles.chartTitle}>
+                  {'X Reposts'}
+                </div>
+                <LineChart data={fans.reposts} />
               </div>
-              <LineChart data={fans.reposts} />
-            </div>
-          </div>}
+            </div></>}
         </div>}
-        {activeTab == 1 && <div className={styles.tabContent}>
-          <SentimentsPieCharts sentiments={sentiments} />
+        <div className={styles.nonecontent} data-index={1}
+          //@ts-ignore
+          ref={(el) => (tabRefs.current[1] = el)}></div>
+        {sentiments && <div className={styles.tabContent} >
+          <><div className={styles.contentTitle}>{tabs[1].name}</div>
+            <SentimentsPieCharts sentiments={sentiments} /></>
         </div>}
-        {activeTab == 2 && <div className={styles.tabContent}>
+        <div className={styles.nonecontent} data-index={2}
+          //@ts-ignore
+          ref={(el) => (tabRefs.current[2] = el)}></div>
+
+        {postData && <div className={styles.tabContent} >
           {
-            postData && <div className={styles.fans}>
+            postData && <><div className={styles.contentTitle}>{tabs[2].name}</div><div className={styles.fans}>
               {postData.map(item =>
                 <XCard item={item} />
               )}
-
-            </div>
+              {postData.map(item =>
+                <XCard item={item} />
+              )}
+            </div></>
           }
         </div>}
-        {activeTab == 3 && <div className={styles.tabContent}>
-          {XKOLMentions && <div className={styles.fans}>
-            <div className={styles.lineLineChartItem}>
-              <div className={styles.chartTitle}>
-                {'KOL Interaction'}
+        <div className={styles.nonecontent} data-index={3}
+          //@ts-ignore
+          ref={(el) => (tabRefs.current[3] = el)}></div>
+        {XKOLMentions && <div className={styles.tabContent} >
+          {XKOLMentions && <><div className={styles.contentTitle}>{tabs[3].name}</div>
+            <div className={styles.fans}>
+              <div className={styles.lineLineChartItem}>
+                <div className={styles.chartTitle}>
+                  {'KOL Interaction'}
+                </div>
+                <LineChart data={XKOLMentions.kols} />
               </div>
-              <LineChart data={XKOLMentions.kols} />
-            </div>
-            <div className={styles.lineLineChartItem}>
-              <div className={styles.chartTitle}>
-                {'KOL mention rate'}
+              <div className={styles.lineLineChartItem}>
+                <div className={styles.chartTitle}>
+                  {'KOL mention rate'}
+                </div>
+                <LineChart data={XKOLMentions.posts} />
               </div>
-              <LineChart data={XKOLMentions.posts} />
-            </div>
-
-          </div>}
+            </div></>}
           {
             XKOLRelatedPostsModel && <div className={styles.fans}>
               {XKOLRelatedPostsModel.map(item =>
@@ -239,16 +298,22 @@ const Xpage = ({ token = { baseAsset: 'BTC' } }) => {
             </div>
           }
         </div>}
-        {activeTab == 4 && <div className={styles.tabContent}>
-          {keywords && <div className={styles.keywords}>
-            {keywords.map((item, index) => {
-              return <div
-                onClick={() => { setActiveKeyword(index); fetchXKeywordStatsModelFunc(keywords[index]) }}
-                className={`${styles.keyword} ${index == activeKeyword ? styles.activekeywords : ''}`}>
-                {item}
-              </div>
-            })}
-          </div>}
+        <div className={styles.nonecontent} data-index={4}
+          //@ts-ignore
+          ref={(el) => (tabRefs.current[4] = el)}></div>
+
+        {keywords && <div className={styles.tabContent} >
+
+          {keywords && <><div className={styles.contentTitle}>{tabs[4].name}</div>
+            <div className={styles.keywords}>
+              {keywords.map((item, index) => {
+                return <div
+                  onClick={() => { setActiveKeyword(index); fetchXKeywordStatsModelFunc(keywords[index]) }}
+                  className={`${styles.keyword} ${index == activeKeyword ? styles.activekeywords : ''}`}>
+                  {item}
+                </div>
+              })}
+            </div></>}
           {keywordStats && <div className={styles.fans}>
             <div className={styles.lineLineChartItem}>
               <div className={styles.chartTitle}>
@@ -268,13 +333,20 @@ const Xpage = ({ token = { baseAsset: 'BTC' } }) => {
             </div>
           }
         </div>}
-        <div className={styles.aiReport}>
-          <div className={styles.aiReportTitle}>{'AI Analysis Report:'}</div>
-          {!aiData ? <Loading /> : <div className={styles.markdwon}>
-            <ReactMarkdown>{aiData}</ReactMarkdown>
-          </div>}
+        <div className={styles.nonecontent} data-index={5}
+          //@ts-ignore
+          ref={(el) => (tabRefs.current[5] = el)}></div>
 
-        </div>
+        {aiData && <div className={styles.tabContent} >
+          <><div className={styles.contentTitle}>{tabs[5].name}</div><div className={styles.aiReport}>
+
+            {!aiData ? <Loading /> : <div className={styles.markdwon}>
+              <ReactMarkdown>{aiData}</ReactMarkdown>
+            </div>}
+
+          </div>
+          </>
+        </div>}
       </div>
     </div>
   );

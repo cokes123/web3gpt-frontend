@@ -21,7 +21,7 @@
 
 .headerTitle {
   color: #202630;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -38,7 +38,7 @@
 .timeTabs {
   display: flex;
   color: #202630;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   gap: 16px;

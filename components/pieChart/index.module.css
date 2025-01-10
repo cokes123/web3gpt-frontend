@@ -1,0 +1,17 @@
+.gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 16px;
+    width: 100%;
+    margin-top: 24px;
+    justify-content: space-between;
+}
+
+.gridItem {
+    border: 1px solid #EEF0F2;
+    background-color: #FDFDFD;
+    border-radius: 8px;
+    padding: 10px;
+
+}

@@ -112,7 +112,7 @@ const Home: React.FC = () => {
       <Header />
       <div className={styles.topInfo}>
         <div className={styles.topInfoLeft}>
-          <div className={styles.myFollow}>
+          {/* <div className={styles.myFollow}>
             <div className={styles.myFollowTitle}>Hot tokens</div>
             <div className={styles.line}></div>
             <div className={styles.myFollowCoinlist}>
@@ -123,7 +123,7 @@ const Home: React.FC = () => {
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
 
           <div className={styles.coinTab}>
             <div className={styles.coinInfo}>
@@ -171,12 +171,13 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className={styles.banner}>
-          <Image
+          {/* <Image
             fill
             style={{ objectFit: "contain" }}
 
             src="/images/banner.png"
-            alt="" />
+            alt="" /> */}
+            BANNER 
         </div>
       </div>
 

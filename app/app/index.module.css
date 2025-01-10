@@ -2,7 +2,7 @@
 
 .topInfo {
     display: flex;
-    height: 133px;
+    height: 48px;
     margin-top: 8px;
     justify-content: space-between;
     gap: 8px;
@@ -14,7 +14,7 @@
     background: #FFF;
     width: 320px;
     position: relative;
-    height: 133px;
+    height: 48px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@
     background: #FFF;
     width: 320px;
     position: relative;
-    height: calc(100vh - 222px);
+    height: calc(100vh - 137px);
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -46,7 +46,7 @@
 
 .myFollowTitle {
     color: #202630;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -74,7 +74,7 @@
 
 .myFollowCoinItemName {
     color: #202630;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -84,7 +84,7 @@
 
 .myFollowCoinItemChange {
     color: #2DBD85;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -98,9 +98,8 @@
 }
 
 .coinTab {
-    margin-top: 7px;
     width: 100%;
-    height: 78px;
+    height: 48px;
     border-radius: 8px;
     display: flex;
     background: #FFF;
@@ -114,13 +113,14 @@
 }
 
 .coinName {
-
+    display: flex;
+    gap: 12px;
     margin-left: 16px;
 }
 
 .coinNameTitle {
     color: #202630;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -129,7 +129,7 @@
 
 .coinExchangeChange {
     color: #202630;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -144,11 +144,14 @@
 
 .price {
     margin-left: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
 .priceTitle {
     color: #2DBD85;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -159,7 +162,7 @@
 .priceContent {
 
     color: #202630;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -169,7 +172,7 @@
 .lineTab {
 
     width: 1px;
-    height: 66px;
+    height: 32px;
     flex-shrink: 0;
     background-color: rgba(0, 0, 0, 0.10);
     margin-left: 16px;
@@ -186,7 +189,6 @@
     height: 30px;
     cursor: pointer;
     margin-left: 12px;
-    margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -195,7 +197,7 @@
     border-radius: 4px;
     background: rgba(0, 0, 0, 0.05);
     color: #202630;
-    font-family: "DM Sans";
+    font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -220,6 +222,6 @@
     position: relative;
     border-radius: 8px;
     width: 1900px;
-    height: calc(100vh - 222px);
+    height: calc(100vh - 137px);
 
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 import PropTypes from 'prop-types';
-
+import styles from './index.module.css';
 /**
  * SentimentPieChart 组件
  * 单个饼状图，用于展示某个日期的情感数据
@@ -56,7 +56,7 @@ const SentimentPieChart = ({ data }) => {
     ],
   };
 
-  return <ReactEcharts option={option} style={{ height: '300px', width: '100%' }} />;
+  return <ReactEcharts option={option} style={{ height: '300px', width: '300px' }} />;
 };
 
 /**
@@ -71,12 +71,11 @@ const SentimentsPieCharts = ({ sentiments, title = 'Sentiment Distribution Over 
   return (
     <div>
       {/* 组件标题 */}
-      {title && <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>{title}</h2>}
 
       {/* 图表网格容器 */}
-      <div style={styles.gridContainer}>
-        {sentiments.map((item) => (
-          <div key={item.date} style={styles.gridItem}>
+      <div className={styles.gridContainer}>
+        {sentiments && sentiments.map((item) => (
+          <div key={item.date} className={styles.gridItem}>
             <div>{item.date}</div>
             <SentimentPieChart data={item} />
           </div>
@@ -86,22 +85,7 @@ const SentimentsPieCharts = ({ sentiments, title = 'Sentiment Distribution Over 
   );
 };
 
-// 样式定义
-const styles = {
-  gridContainer: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-    gap: '20px',
-    padding:'0 48px'
-  },
-  gridItem: {
-    border: '1px solid #e0e0e0',
-    borderRadius: '8px',
-    padding: '10px',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-    backgroundColor: '#fff',
-  },
-};
+
 
 // PropTypes 类型检查
 SentimentPieChart.propTypes = {

@@ -107,7 +107,7 @@ const Chart = ({ token = { baseAsset: 'BTC', symbol: 'BTCUSDT' } }) => {
                     <LightweightChart token={token}></LightweightChart>
                 </div>
 
-                <div className={styles.orderBook}>
+                {/* <div className={styles.orderBook}>
                     <div className={styles.orderbooktitle}>
                         {"Order Book"}
                     </div>
@@ -133,7 +133,7 @@ const Chart = ({ token = { baseAsset: 'BTC', symbol: 'BTCUSDT' } }) => {
                             </div>)}
                         </div>
                     </div>}
-                </div>
+                </div> */}
             </div>
             <div className={styles.bottom}>
                 <div className={styles.bottomHeader}>

@@ -1,13 +1,13 @@
 .chart {
 
-  height: calc(100vh - 496px);
+  height: calc(100vh - 412px);
   display: flex;
   position: relative;
   justify-content: space-between;
 }
 
 .kLine {
-  width: calc(100vw - 632px);
+  width: calc(100vw - 344px);
   display: flex;
 
   position: relative;
@@ -31,7 +31,7 @@
 
   color: #202630;
   text-align: right;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -53,7 +53,7 @@
 .sellamount {
   color: #202630;
   text-align: right;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -63,7 +63,7 @@
 .orderBookItem {
   display: flex;
   color: #20263078;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -73,7 +73,7 @@
 
 .buyPrice {
   color: #F6475D;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -82,7 +82,7 @@
 
 .sellPrice {
   color: #2DBD85;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -102,7 +102,7 @@
 
 .orderbooktitle {
   color: #202630;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -137,7 +137,7 @@
 
 .activeBottom {
   color: #3F6DFF !important;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 600 !important;
@@ -147,7 +147,7 @@
 
 .bottomTitle {
   color: #20263094;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   height: 100%;
@@ -173,7 +173,7 @@
 
 .loadingTitle {
   color: #000;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -191,7 +191,7 @@
   color: #000;
   text-align: center;
   overflow-y: scroll;
-  font-family: "DM Sans";
+  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
